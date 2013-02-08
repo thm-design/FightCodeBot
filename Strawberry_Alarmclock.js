@@ -3,7 +3,7 @@
 //if its class is called Robot
 var Robot = function(robot) { };
 
-Robot.Velocity = 10;
+Robot.Velocity = 180;
 
 Robot.prototype.rad2deg = function(rads)
 {
@@ -14,10 +14,10 @@ Robot.prototype.distance = function(ev)
 {
   var robot = ev.robot;
   var enemy = ev.scannedRobot;
-  
+
   var txs = Math.pow(enemy.position.x - robot.position.x);
   var tys = Math.pow(enemy.position.y - robot.position.y);
-  
+
   return Math.sqrt(txs + tys);
 };
 
@@ -30,16 +30,24 @@ Robot.prototype.bearing = function(ev)
 
 Robot.prototype.getAngleFromCoord = function(ev)
 {
-  
+
 };
 
 Robot.prototype.onIdle = function(ev) {
     var robot = ev.robot;
-    robot.ahead(100);
-  robot.rotateCannon(360);
-  robot.rotateCannon(-360);
+    robot.ahead(50);
+  	robot.fire();
+  	robot.rotateCannon(90);
+  	robot.fire();
+  	robot.ahead(50);
+  	robot.fire();
+  	robot.back(50);
+  	robot.fire();
+ 		robot.rotateCannon(360);
+  	robot.fire();
+  	robot.rotateCannon(-360);
 //    robot.back(50);
-//    robot.rotateCannon(90);
+    robot.rotateCannon(90);
 
 };
 
@@ -64,7 +72,7 @@ Robot.prototype.onRobotCollision = function(ev) {
 };
 
 Robot.prototype.onHitByBullet = function(ev) {
-  var robot = ev.robot;  
+  var robot = ev.robot;
   robot.rotateCannon(ev.bearing);
-	
+
 };
